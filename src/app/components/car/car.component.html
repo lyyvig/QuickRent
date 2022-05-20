@@ -1,0 +1,15 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div *ngFor="let car of carsWithDetails" class="col">
+    <div routerLink="/car/{{car.id}}" class="card">
+      <img src="{{url + car.images[0].imagePath}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{car.description}}</h5>
+        <p class="card-text">
+          Brand: {{car.brandName}}<br>
+          Color: {{car.colorName}}<br>
+          Daily Price: {{car.dailyPrice}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

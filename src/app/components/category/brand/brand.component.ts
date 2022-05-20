@@ -10,21 +10,47 @@ import { Component, OnInit } from '@angular/core';
 export class BrandComponent implements OnInit {
 
   dataLoaded = false;
-  brands:Brand[] = []
+  brands: Brand[] = []
+  currentBrand?: Brand;
 
-  constructor(private brandService:BrandService) { }
+  constructor(private brandService: BrandService) { }
 
   ngOnInit(): void {
+
     this.getBrands();
   }
 
-  getBrands(){
+  getBrands() {
     this.brandService.getBrands().subscribe((result) => {
-      if(result.success){
+      if (result.success) {
         this.brands = result.data;
         this.dataLoaded = true;
       }
     })
+  }
+
+  setCurrentBrand(brand: Brand) {
+    this.currentBrand = brand;
+
+  }
+
+  getCurrentBrandClass(brand: Brand) {
+    if (brand == this.currentBrand) {
+      return "list-group-item active";
+    }
+    return "list-group-item";
+  }
+
+  setAllBrand() {
+    this.currentBrand = undefined;
+
+  }
+
+  getAllBrandClass(){
+    if(!this.currentBrand){
+      return "list-group-item active text-center";
+    }
+    return "list-group-item text-center";
   }
 
 
