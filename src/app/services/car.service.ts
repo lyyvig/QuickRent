@@ -1,9 +1,10 @@
+import { FilterOptions } from './../models/filterOptions';
 import { ObjectResponseModel } from './../models/objectResponseModel';
 import { CarDetail } from './../models/carDetail';
 import { ListResponseModel } from './../models/listResponseModel';
 import { apiUrl } from './serviceConstants';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../models/car';
 
@@ -24,12 +25,8 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<CarDetail>>(this.serviceUrl + "getdetails")
   }
 
-  getDetailsByBrandId(brandId:number):Observable<ListResponseModel<CarDetail>>{
-    return this.httpClient.get<ListResponseModel<CarDetail>>(this.serviceUrl + "getdetailsbybrandid?brandId=" + brandId)
-  }
-
-  getDetailsByColorId(colorId:number):Observable<ListResponseModel<CarDetail>>{
-    return this.httpClient.get<ListResponseModel<CarDetail>>(this.serviceUrl + "getdetailsbycolorid?colorId=" + colorId)
+  getDetailsByFilter(filterOptions:FilterOptions):Observable<ListResponseModel<CarDetail>>{
+    return this.httpClient.post<ListResponseModel<CarDetail>>(this.serviceUrl + "getdetailsbyfilter", filterOptions)
   }
 
   getCarDetail(carId:number):Observable<ObjectResponseModel<CarDetail>>{

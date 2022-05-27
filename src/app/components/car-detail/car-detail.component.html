@@ -1,24 +1,68 @@
-<div *ngIf="dataLoaded" id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div *ngFor="let image of currentCar.images" [class]="getPhotoClass(image)">
-      <img src="{{url + image.imagePath}}" class="d-block w-100" alt="">
+<div *ngIf="dataLoaded" class="row align-items-center">
+  <div class="col-1"></div>
+  <div class="col-7 ">
+    <div *ngIf="dataLoaded" id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div *ngFor="let image of currentCar.images" [class]="getPhotoClass(image)">
+          <img src="{{url + image.imagePath}}" class="d-block w-100" alt="">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
+
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+  <div class="col-3 ">
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item list-group-item-dark">Color: </li>
+      <li class="list-group-item list-group-item-secondary">{{currentCar.colorName}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item list-group-item-dark">Brand: </li>
+      <li class="list-group-item list-group-item-secondary">{{currentCar.brandName}}</li>
+    </ul>
+
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item list-group-item-dark">Daily Price: </li>
+      <li class="list-group-item list-group-item-secondary">{{currentCar.dailyPrice | currency}}</li>
+    </ul>
+    <ul class="list-group list-group-horizontal">
+      <li class="list-group-item list-group-item-dark">Model Year: </li>
+      <li class="list-group-item list-group-item-secondary">{{currentCar.modelYear}}</li>
+    </ul>
+
+
 </div>
 
-<div>
-  <p>
-    Brand: {{currentCar.brandName}}<br>
-    Color: {{currentCar.colorName}}<br>
-    Daily Price: {{currentCar.dailyPrice}}
-  </p>
-  <h5>{{currentCar.description}}</h5>
+<div class="row justify-content-center">
+  <div class="col-4 ">
+    <ul class="list-group list-group-horizontal">
+      <span class="input-group-text list-group-item-dark" id="basic-addon1">Rent Date: </span>
+      <input [(ngModel)]="rentDate" (ngModelChange)="checkIfDateSuitable()" min="{{minDate | date:'yyyy-MM-dd'}}" type="date" class="form-control" placeholder="Rent Date" aria-label="Rent Date" aria-describedby="basic-addon1">
+    </ul>
+  </div>
+
+</div>
+<div class="row justify-content-center">
+  <div class="col-4 ">
+    <ul class="list-group list-group-horizontal">
+      <span class="input-group-text list-group-item-dark" id="basic-addon1">Return Date: </span>
+      <input [(ngModel)]="returnDate" min="{{minDate | date:'yyyy-MM-dd'}}" type="date" class="form-control" placeholder="Return Date" aria-label="Return Date" aria-describedby="basic-addon1">
+    </ul>
+  </div>
+
+</div>
+<div class="row justify-content-center">
+  <div class="col-1 ">
+    <button *ngIf="!returnDate || !rentDate" (click)="setOrder()" type="button" class="btn btn-success" disabled>Rent</button>
+    <button *ngIf="returnDate && rentDate" (click)="setOrder()" type="button" class="btn btn-success">Rent</button>
+  </div>
 </div>

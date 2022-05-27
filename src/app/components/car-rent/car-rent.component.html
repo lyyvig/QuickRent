@@ -1,0 +1,45 @@
+<form>
+
+  <div class="row justify-content-center">
+    <div class="col-3 justify-content-center">
+      <label for="cardNumber">Credit Card Number</label>
+      <input [(ngModel)]="cardNumber" [maxlength]="16" type="text" class="form-control"
+        placeholder="0123 0123 0123 0123" aria-label="Credit Card Number" aria-describedby="basic-addon1">
+    </div>
+  </div>
+
+
+
+  <div class="row justify-content-center">
+    <div class=" col-1">
+      <label for="expireMonth">Month</label>
+      <select class="form-select" [(ngModel)]="expireMonth" aria-label="Month" placeholder="Month">
+        <option *ngFor="let month of monthOptions" value={{month}}>{{month}}</option>
+      </select>
+    </div>
+    <div class="col-1">
+      <label for="expireYear">Year</label>
+      <select class="form-select" [(ngModel)]="expireYear" aria-label="Year" placeholder="Year">
+        <option *ngFor="let year of yearOptions" value={{20+year}}>{{year}}</option>
+      </select>
+    </div>
+    <div class="col-1">
+      <label for="cvc">CVC</label>
+      <input [(ngModel)]="cvc" [maxlength]="3" type="text" class="form-control" placeholder="123" aria-label="CVC"
+        aria-describedby="basic-addon1">
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div *ngIf="!ValidateCreditCard()" class="col-1">
+      <button disabled (click)="Order()" class="btn btn-outline-success" type="button" id="confirm">Confirm</button>
+    </div>
+    <div *ngIf="ValidateCreditCard()" class="col-1">
+      <button (click)="Order()" class="btn btn-outline-success" type="button" id="confirm">Confirm</button>
+    </div>
+    <div class="col-1">
+      <button routerLink="" class="btn btn-outline-danger" type="button" id="cancel">Cancel</button>
+    </div>
+  </div>
+
+</form>
