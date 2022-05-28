@@ -11,9 +11,16 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarRentComponent } from './components/car-rent/car-rent.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { ColorUpdateComponent } from './components/color-update/color-update.component';
+import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +30,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CustomerComponent,
     RentalComponent,
     CarDetailComponent,
-    CarRentComponent
+    CarRentComponent,
+    CarAddComponent,
+    BrandAddComponent,
+    ColorAddComponent,
+    ColorUpdateComponent,
+    BrandUpdateComponent,
+    CarUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"

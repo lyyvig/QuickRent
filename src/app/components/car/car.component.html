@@ -37,7 +37,7 @@
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div *ngFor="let car of cars" class="col">
-      <div routerLink="/car/{{car.id}}" class="card">
+      <div class="card">
         <img src="{{url + car.images[0].imagePath}}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{car.description}}</h5>
@@ -46,6 +46,10 @@
             Color: {{car.colorName}}<br>
             Daily Price: {{car.dailyPrice}}
           </p>
+        </div>
+        <div class="card-foot">
+          <button routerLink="/car/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="details">Details</button>
+          <button routerLink="/car/update/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="edit">Edit</button>
         </div>
       </div>
     </div>

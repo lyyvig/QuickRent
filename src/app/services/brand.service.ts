@@ -1,3 +1,4 @@
+import { ResponseModel } from './../models/responseModel';
 import { Brand } from './../models/brand';
 import { ListResponseModel } from './../models/listResponseModel';
 import { apiUrl } from './serviceConstants';
@@ -16,6 +17,18 @@ export class BrandService {
 
   getBrands(): Observable<ListResponseModel<Brand>> {
     return this.httpClient.get<ListResponseModel<Brand>>(this.serviceUrl + "getall");
+  }
+
+  addBrand(brand: Brand): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "add", brand);
+  }
+
+  updateBrand(brand: Brand): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "update", brand);
+  }
+
+  deleteBrand(brand:Brand) : Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "delete", brand);
   }
 
 }

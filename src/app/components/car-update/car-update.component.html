@@ -1,0 +1,44 @@
+<div *ngIf="dataLoaded" class="row justify-content-center">
+
+  <div class="col-md-7 ">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Update Car</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="carUpdateForm">
+          <div class="form-group mb-3">
+            <label>Description</label>
+            <input type="text" class="form-control" formControlName="description" placeholder="Enter Car Description">
+          </div>
+          <div class="form-group">
+            <label>Car Model Year</label>
+            <input type="number" class="form-control" formControlName="modelYear" placeholder="Enter Car Model">
+          </div>
+          <div class="form-group">
+            <label>Car Color</label>
+            <select class="form-select" formControlName="colorId" placeholder="Enter Car Color">
+              <option *ngFor="let color of colors" value={{color.id}}>{{color.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Car Brand</label>
+            <select class="form-select" formControlName="brandId" placeholder="Enter Car Brand">
+              <option *ngFor="let brand of brands" value={{brand.id}}>{{brand.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Daily Car Price</label>
+            <input type="number" class="form-control" formControlName="dailyPrice" placeholder="Enter Daily Car Price">
+          </div>
+
+
+
+        </form>
+        <button [disabled]="carUpdateForm.invalid" type="submit" class="btn btn-primary" (click)="updateCar()">Update</button>
+
+      </div>
+    </div>
+  </div>
+</div>

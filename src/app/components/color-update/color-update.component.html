@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+
+  <div class="col-md-7 ">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Update Color</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="colorUpdateForm">
+
+          <div class="form-group">
+            <label>Select Color</label>
+            <select class="form-select" formControlName="id" placeholder="Select Color">
+              <option *ngFor="let color of colors" value={{color.id}}>{{color.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group mb-3">
+            <label>New Color Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Color Name">
+          </div>
+
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" (click)="updateColor()" [disabled]="colorUpdateForm.invalid">Update Color</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
