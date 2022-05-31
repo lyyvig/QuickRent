@@ -1,6 +1,5 @@
 import { Color } from './../../models/color';
 import { ToastrService } from 'ngx-toastr';
-import { ErrorService } from './../../services/error.service';
 import { ColorService } from './../../services/color.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +16,6 @@ export class ColorUpdateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private colorService: ColorService,
-    private errorService: ErrorService,
     private toastrService: ToastrService
   ) { }
 
@@ -48,11 +46,7 @@ export class ColorUpdateComponent implements OnInit {
           else {
             this.toastrService.error(res.message, this.colorUpdateForm.value.name);
           }
-        },
-        (err) => {
-          this.errorService.showError(err);
-        }
-      );
+        });
     }
     else {
       this.toastrService.error('Please fill all the required fields');

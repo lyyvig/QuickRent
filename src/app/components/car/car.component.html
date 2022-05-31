@@ -1,58 +1,60 @@
-<form *ngIf="carsDataLoaded == true" class="row g-3 ">
-  <div class=" col-3">
-    <select  class="form-select" [(ngModel)]="filter.brandId" aria-label="Brand">
-      <option value=0>All Brands</option>
-      <option *ngFor="let brand of brands" value={{brand.id}}>{{brand.name}}</option>
-    </select>
-  </div>
-  <div class="col-3">
-    <select  class="form-select" [(ngModel)]="filter.colorId" aria-label="Color">
-      <option value=0>All Colors</option>
-      <option *ngFor="let color of colors" value={{color.id}}>{{color.name}}</option>
-    </select>
-  </div>
 
-  <div class="col-2">
-    <input [(ngModel)]="filter.minPrice" type="number" class="form-control" placeholder="Min Price" aria-label="Min Price" aria-describedby="basic-addon1">
-  </div>
+  <form *ngIf="carsDataLoaded == true" class="row g-3">
+    <div class=" col-3">
+      <select  class="form-select" [(ngModel)]="filter.brandId" aria-label="Brand">
+        <option value=0>All Brands</option>
+        <option *ngFor="let brand of brands" value={{brand.id}}>{{brand.name}}</option>
+      </select>
+    </div>
+    <div class="col-3">
+      <select  class="form-select" [(ngModel)]="filter.colorId" aria-label="Color">
+        <option value=0>All Colors</option>
+        <option *ngFor="let color of colors" value={{color.id}}>{{color.name}}</option>
+      </select>
+    </div>
 
-  <div class="col-2">
-    <input [(ngModel)]="filter.maxPrice" type="number" class="form-control" placeholder="Max Price" aria-label="Max Price" aria-describedby="basic-addon1">
-  </div>
+    <div class="col-2">
+      <input [(ngModel)]="filter.minPrice" type="number" class="form-control" placeholder="Min Price" aria-label="Min Price" aria-describedby="basic-addon1">
+    </div>
 
-  <div class="col-2">
-    <input [(ngModel)]="filter.minModelYear" type="number" class="form-control" placeholder="Model Year" aria-label="Model Year" aria-describedby="basic-addon1">
-  </div>
-  <div class="col-1">
-    <button (click)="getDetailsByFilter()" class="btn btn-outline-secondary" type="button" id="filter">Filter</button>
-  </div>
+    <div class="col-2">
+      <input [(ngModel)]="filter.maxPrice" type="number" class="form-control" placeholder="Max Price" aria-label="Max Price" aria-describedby="basic-addon1">
+    </div>
 
-  <div class="col-1">
-    <button (click)="getDetails()" class="btn btn-outline-secondary" type="button" id="filter">Clear</button>
-  </div>
+    <div class="col-2">
+      <input [(ngModel)]="filter.minModelYear" type="number" class="form-control" placeholder="Model Year" aria-label="Model Year" aria-describedby="basic-addon1">
+    </div>
+    <div class="col-1">
+      <button (click)="getDetailsByFilter()" class="btn btn-outline-secondary" type="button" id="filter">Filter</button>
+    </div>
 
-</form>
+    <div class="col-1">
+      <button (click)="getDetails()" class="btn btn-outline-secondary" type="button" id="filter">Clear</button>
+    </div>
 
-<div>
+  </form>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div *ngFor="let car of cars" class="col">
-      <div class="card">
-        <img src="{{url + car.images[0].imagePath}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{car.description}}</h5>
-          <p class="card-text">
-            Brand: {{car.brandName}}<br>
-            Color: {{car.colorName}}<br>
-            Daily Price: {{car.dailyPrice}}
-          </p>
-        </div>
-        <div class="card-foot">
-          <button routerLink="/car/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="details">Details</button>
-          <button routerLink="/car/update/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="edit">Edit</button>
+  <div>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div *ngFor="let car of cars" class="col">
+        <div class="card">
+          <img src="{{url + car.images[0].imagePath}}" height="170" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{car.brandName + " " + car.model}}</h5>
+            <p class="card-text">
+              Brand: {{car.brandName}}<br>
+              Color: {{car.colorName}}<br>
+              Daily Price: {{car.dailyPrice}}
+            </p>
+          </div>
+          <div class="card-foot">
+            <button routerLink="/car/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="details">Details</button>
+            <button routerLink="/car/update/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="edit">Edit</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
 

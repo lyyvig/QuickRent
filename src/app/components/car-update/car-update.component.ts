@@ -1,4 +1,3 @@
-import { ErrorService } from './../../services/error.service';
 import { BrandService } from './../../services/brand.service';
 import { ColorService } from './../../services/color.service';
 import { Brand } from './../../models/brand';
@@ -29,8 +28,7 @@ export class CarUpdateComponent implements OnInit {
     private toastrService:ToastrService,
     private formBuilder: FormBuilder,
     private colorService: ColorService,
-    private brandService: BrandService,
-    private errorService: ErrorService) { }
+    private brandService: BrandService) { }
 
 
 
@@ -92,10 +90,7 @@ export class CarUpdateComponent implements OnInit {
       else {
         this.toastrService.error(result.message)
       }
-    }, error => {
-      this.errorService.showError(error)
-    }
-    )
+    })
   }
 
 

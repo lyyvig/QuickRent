@@ -1,4 +1,3 @@
-import { ErrorService } from './../../services/error.service';
 import { Brand } from './../../models/brand';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -18,8 +17,7 @@ export class BrandUpdateComponent implements OnInit {
   constructor(
     private brandService: BrandService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder,
-    private errorService: ErrorService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -43,11 +41,7 @@ export class BrandUpdateComponent implements OnInit {
           this.brandUpdateForm.reset();
         }
         else { this.toastrService.error(res.message, 'Error'); }
-      },
-      (err) => {
-        this.errorService.showError(err);
-      }
-    );
+      });
   }
 
   getBrands(){

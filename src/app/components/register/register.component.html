@@ -1,0 +1,39 @@
+<div class="text-center">
+  <main class="form-register w-100 m-auto">
+    <form [formGroup]="registerForm">
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <div class="form-floating">
+        <input type="text" class="form-control" formControlName="firstName" id="floatingInput"
+          placeholder="Boris">
+        <label for="floatingInput">First Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" formControlName="lastName" id="floatingInput"
+          placeholder="Knows">
+        <label for="floatingInput">Last Name</label>
+      </div>
+
+      <div class="form-floating">
+        <input type="email" class="form-control" formControlName="email" id="floatingInput"
+          placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="password" id="floatingPassword"
+          placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="confirmPassword" id="floatingConfirmPassword"
+          placeholder="Confirm">
+        <label for="floatingConfirmPassword">Confirm</label>
+      </div>
+
+      <button type="button" (click)="register()" [disabled]="registerForm.invalid" class="w-100 btn btn-lg btn-primary">Register</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+    </form>
+  </main>
+
+
+
+</div>

@@ -1,4 +1,3 @@
-import { ErrorService } from './../../services/error.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BrandService } from './../../services/brand.service';
@@ -16,8 +15,7 @@ export class BrandAddComponent implements OnInit {
   constructor(
     private brandService: BrandService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder,
-    private errorService: ErrorService
+    private formBuilder: FormBuilder
   ) { }
 
 
@@ -42,11 +40,7 @@ export class BrandAddComponent implements OnInit {
           else {
             this.toastrService.error(res.message, this.brandAddForm.value.name);
           }
-        },
-        (err) => {
-          this.errorService.showError(err);
-        }
-      );
+        });
     }
     else {
       this.toastrService.error('Please fill all the required fields');

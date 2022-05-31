@@ -1,0 +1,55 @@
+<div class=" ">
+  <main class="row form-register w-100 m-auto">
+    <form *ngIf="userLoaded" class="col " [formGroup]="userUpdateForm">
+      <h1 class="h3 mb-3 fw-normal">Change Name or password</h1>
+      <div class="form-floating">
+        <input type="text" class="form-control" formControlName="firstName" id="firstName"
+          placeholder="Boris">
+        <label for="firstName">First Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" formControlName="lastName" id="lastName"
+          placeholder="Knows">
+        <label for="lastName">Last Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="oldPassword" id="oldPassword"
+          placeholder="Password">
+        <label for="oldPassword">Old Password</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="newPassword" id="newPassword"
+          placeholder="Password">
+        <label for="newPassword">New Password</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword"
+          placeholder="Confirm">
+        <label for="confirmPassword">New Password Confirm</label>
+      </div>
+
+      <button type="button" (click)="updateUser()" [disabled]="userUpdateForm.invalid" class="w-100 btn btn-lg btn-primary">Save</button>
+    </form>
+
+    <form *ngIf="customerLoaded" class="col" [formGroup]="customerUpdateForm">
+      <h1 class="h3 mb-3 fw-normal">Change Customer Information</h1>
+      <div class="form-floating">
+        <input type="text" class="form-control" formControlName="companyName" id="companyName"
+        placeholder="Boris">
+        <label for="companyName">Company Name</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" formControlName="nationalIdentity" id="NationalIdentity"
+        placeholder="Knows">
+        <label for="NationalIdentity">National Identity</label>
+      </div>
+
+
+      <button type="button" (click)="updateCustomer()" [disabled]="customerUpdateForm.invalid" class="w-100 btn btn-lg btn-primary">Save</button>
+    </form>
+  </main>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+
+
+
+</div>

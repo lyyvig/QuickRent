@@ -1,4 +1,3 @@
-import { ErrorService } from './../../services/error.service';
 import { ToastrService } from 'ngx-toastr';
 import { CarService } from './../../services/car.service';
 import { BrandService } from './../../services/brand.service';
@@ -24,8 +23,7 @@ export class CarAddComponent implements OnInit {
     private colorService: ColorService,
     private brandService: BrandService,
     private toastrService: ToastrService,
-    private carService: CarService,
-    private errorService: ErrorService
+    private carService: CarService
   ) { }
 
   ngOnInit(): void {
@@ -72,9 +70,6 @@ export class CarAddComponent implements OnInit {
         else {
           this.toastrService.error(result.message);
         }
-      }, err => {
-        this.errorService.showError(err);
-
       });
     }
     else {
