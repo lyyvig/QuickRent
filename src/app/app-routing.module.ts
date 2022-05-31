@@ -1,7 +1,6 @@
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotLoginGuard } from './guards/not-login.guard';
-import { DemoComponent } from './components/demo/demo.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './components/login/login.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
@@ -20,7 +19,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {path:"", component:CarComponent},
-  {path:"demo", component:DemoComponent},
   {path:"cars", component:CarComponent},
   {path:"car/:carId", component:CarDetailComponent},
   {path:"car/update/:carId", component:CarUpdateComponent, canActivate:[LoginGuard]},
