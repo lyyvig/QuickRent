@@ -1,0 +1,69 @@
+<p-table #dt [value]="users" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+  [loading]="!usersLoaded" responsiveLayout="scroll" [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="name">
+        <div class="flex justify-content-between align-items-center">
+          Name
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="surname">
+        <div class="flex justify-content-between align-items-center">
+          Surname
+          <p-sortIcon field="surname"></p-sortIcon>
+          <p-columnFilter type="text" field="surname" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="email">
+        <div class="flex justify-content-between align-items-center">
+          Email
+          <p-sortIcon field="email"></p-sortIcon>
+          <p-columnFilter type="text" field="email" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pColumn>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr class="p-row">
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{user.firstName}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{user.lastName}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{user.email}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <button pButton class="p-button-rounded p-button-info p-button-sm" (click)="claims()" label="Claims"></button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No colors found.</td>
+    </tr>
+  </ng-template>
+</p-table>

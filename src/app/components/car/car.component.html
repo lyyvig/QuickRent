@@ -1,60 +1,61 @@
-
-  <form *ngIf="carsDataLoaded == true" class="row g-3">
-    <div class=" col-3">
-      <select  class="form-select" [(ngModel)]="filter.brandId" aria-label="Brand">
-        <option value=0>All Brands</option>
-        <option *ngFor="let brand of brands" value={{brand.id}}>{{brand.name}}</option>
-      </select>
-    </div>
-    <div class="col-3">
-      <select  class="form-select" [(ngModel)]="filter.colorId" aria-label="Color">
-        <option value=0>All Colors</option>
-        <option *ngFor="let color of colors" value={{color.id}}>{{color.name}}</option>
-      </select>
-    </div>
-
-    <div class="col-2">
-      <input [(ngModel)]="filter.minPrice" type="number" class="form-control" placeholder="Min Price" aria-label="Min Price" aria-describedby="basic-addon1">
-    </div>
-
-    <div class="col-2">
-      <input [(ngModel)]="filter.maxPrice" type="number" class="form-control" placeholder="Max Price" aria-label="Max Price" aria-describedby="basic-addon1">
-    </div>
-
-    <div class="col-2">
-      <input [(ngModel)]="filter.minModelYear" type="number" class="form-control" placeholder="Model Year" aria-label="Model Year" aria-describedby="basic-addon1">
-    </div>
-    <div class="col-1">
-      <button (click)="getDetailsByFilter()" class="btn btn-outline-secondary" type="button" id="filter">Filter</button>
-    </div>
-
-    <div class="col-1">
-      <button (click)="getDetails()" class="btn btn-outline-secondary" type="button" id="filter">Clear</button>
-    </div>
-
-  </form>
-
-  <div>
-
-    <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div *ngFor="let car of cars" class="col">
-        <div class="card">
-          <img src="{{url + car.images[0].imagePath}}" height="170" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{car.brandName + " " + car.model}}</h5>
-            <p class="card-text">
-              Brand: {{car.brandName}}<br>
-              Color: {{car.colorName}}<br>
-              Daily Price: {{car.dailyPrice}}
-            </p>
-          </div>
-          <div class="card-foot">
-            <button routerLink="/car/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="details">Details</button>
-            <button routerLink="/car/update/{{car.id}}"  class="btn btn-outline-secondary" type="button" id="edit">Edit</button>
-          </div>
+<form [formGroup]="filterForm">
+  <p-accordion>
+    <p-accordionTab header="Filter">
+      <div class="row">
+        <div class="col-2  me-2">
+          <h5 class="text-center">Brand</h5>
+          <p-listbox [options]="brands" optionLabel="name" optionValue="id" formControlName="brandId"
+            placeholder="Select Brand" [listStyle]="{'max-height':'200px'}"></p-listbox>
+        </div>
+        <div class="col-2  me-1">
+          <h5 class="text-center">Color</h5>
+          <p-listbox [options]="colors" optionLabel="name" optionValue="id" formControlName="colorId"
+            placeholder="Select Color" [listStyle]="{'max-height':'200px'}">
+          </p-listbox>
+        </div>
+        <div class="col-2">
+          <span class="p-float-label">
+            <input class="p-inputtext-sm" id="minModelYear" type="number" formControlName="minModelYear" pInputText>
+            <label for="minModelYear">Min Model Year</label>
+          </span>
+          <span class="p-float-label mt-3">
+            <input class="p-inputtext-sm" id="minPrice" type="number" formControlName="minPrice" pInputText>
+            <label for="minPrice">Min Daily Price</label>
+          </span>
+          <span class="p-float-label mt-1">
+            <input class="p-inputtext-sm" id="maxPrice" type="number" formControlName="maxPrice" pInputText>
+            <label for="maxPrice">Max Daily Price</label>
+          </span>
         </div>
       </div>
+      <div class="row mt-3">
+        <div class="col-2">
+          <button pButton pRipple type="button" label="Filter" icon="pi pi-search" class="p-button-rounded" (click)="getDetailsByFilter()"></button>
+        </div>
+        <div class="col-2">
+          <button type="button" pButton label="Clear" icon="pi pi-times" (click)="clear()"></button>
+        </div>
+      </div>
+
+    </p-accordionTab>
+  </p-accordion>
+</form>
+
+<div class="mt-5">
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div *ngFor="let car of cars" class="col">
+      <p-card header="{{car.brandName}}" subheader="{{car.dailyPrice | currency}}">
+        <ng-template pTemplate="header">
+          <img alt="Card" src="{{car.images[0].imagePath | apiImage}}" style="height: 13vw;  object-fit: cover;">
+        </ng-template>
+        <p class="text-center">Rent a {{car.modelYear + " " + car.colorName + " " + car.brandName + " " + car.model}} car now.  </p>
+        <ng-template pTemplate="footer">
+          <div class="d-flex justify-content-center">
+            <button routerLink="/car/{{car.id}}" pButton pRipple type="button" label="Details" class="p-button-outlined p-button-rounded"></button>
+          </div>
+        </ng-template>
+      </p-card>
     </div>
   </div>
-
-
+</div>
+<div>

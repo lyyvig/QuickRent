@@ -1,45 +1,69 @@
-<form>
-
-  <div class="row justify-content-center">
-    <div class="col-3 justify-content-center">
-      <label for="cardNumber">Credit Card Number</label>
-      <input [(ngModel)]="cardNumber" [maxlength]="16" type="text" class="form-control"
-        placeholder="0123 0123 0123 0123" aria-label="Credit Card Number" aria-describedby="basic-addon1">
+<div *ngIf="!confirmed">
+  <div class="row">
+    <div class="col-6">
+      <div class="text-center"><label>Rent Date</label></div>
+      <div *ngIf="invalidDatesLoaded" class="d-flex justify-content-center">
+        <p-calendar class="ml-2" (onSelect)="rentDaySelect($event)" [(ngModel)]="rentDate" [showOtherMonths]="true"
+          [disabled]="confirmed" [readonlyInput]="true" [inline]="true" inputId="rentDate" [minDate]="today"
+          [maxDate]="maxDate" [disabledDates]="invalidDates"></p-calendar>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="text-center"><label>Return Date</label></div>
+      <div *ngIf="invalidDatesLoaded" class="d-flex justify-content-center">
+        <p-calendar class="ml-2" [(ngModel)]="returnDate" [showOtherMonths]="true" [readonlyInput]="true"
+          [inline]="true" [disabled]="confirmed" inputId="returnDate" [minDate]="rentDate" [maxDate]="maxReturnDate">
+        </p-calendar>
+      </div>
     </div>
   </div>
 
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <button pButton type="button" label="Next" class="p-button-outlined p-button-rounded" (click)="next()"></button>
+    </div>
+  </div>
+</div>
 
 
-  <div class="row justify-content-center">
-    <div class=" col-1">
-      <label for="expireMonth">Month</label>
-      <select class="form-select" [(ngModel)]="expireMonth" aria-label="Month" placeholder="Month">
-        <option *ngFor="let month of monthOptions" value={{month}}>{{month}}</option>
-      </select>
+<div *ngIf="confirmed" class="align-items-end">
+  <div class="row text-center"><a>{{"Renting " + config.data.brandName + " " + config.data.model + " for " + totalRentDays + " days in total price of " + totalRentPrice + "$"}}</a></div>
+  <form [formGroup]="creditCardForm">
+    <div class="p-fluid formgrid grid">
+      <div class="field col-12">
+        <label for="class">Card Holder Name</label>
+        <input type="text" formControlName="cardHolderName" pInputText>
+      </div>
+      <div class="row">
+        <div class="field col-8">
+          <label id="number" for="lastname">Number</label>
+          <p-inputMask formControlName="cardNumber" inputId="number" mask="9999-9999-9999-9999"></p-inputMask>
+        </div>
+        <div class="field col-2">
+          <label id="date" for="date">Date</label>
+          <p-inputMask inputId="date" mask="99/99" formControlName="date"></p-inputMask>
+        </div>
+        <div class="field col-2">
+          <label for="cvc">CVC</label>
+          <p-inputMask id="cvc" mask="999" formControlName="cvc"></p-inputMask>
+        </div>
+
+      </div>
+
+
     </div>
-    <div class="col-1">
-      <label for="expireYear">Year</label>
-      <select class="form-select" [(ngModel)]="expireYear" aria-label="Year" placeholder="Year">
-        <option *ngFor="let year of yearOptions" value={{20+year}}>{{year}}</option>
-      </select>
+
+
+  </form>
+  <div class="row justify-content-between mt-5">
+    <div class="col-auto">
+      <button pButton type="button" label="Back" class="p-button-outlined p-button-rounded" (click)="back()"></button>
     </div>
-    <div class="col-1">
-      <label for="cvc">CVC</label>
-      <input [(ngModel)]="cvc" [maxlength]="3" type="text" class="form-control" placeholder="123" aria-label="CVC"
-        aria-describedby="basic-addon1">
+
+    <div class="col-auto">
+      <button [disabled]="creditCardForm.invalid" pButton type="button" label="Confirm" class="p-button-outlined p-button-rounded"
+        (click)="confirm()"></button>
     </div>
   </div>
 
-  <div class="row justify-content-center">
-    <div *ngIf="!ValidateCreditCard()" class="col-1">
-      <button disabled (click)="Order()" class="btn btn-outline-success" type="button" id="confirm">Confirm</button>
-    </div>
-    <div *ngIf="ValidateCreditCard()" class="col-1">
-      <button (click)="Order()" class="btn btn-outline-success" type="button" id="confirm">Confirm</button>
-    </div>
-    <div class="col-1">
-      <button routerLink="" class="btn btn-outline-danger" type="button" id="cancel">Cancel</button>
-    </div>
-  </div>
-
-</form>
+</div>

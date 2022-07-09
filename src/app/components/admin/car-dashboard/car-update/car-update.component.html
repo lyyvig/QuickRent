@@ -1,0 +1,88 @@
+
+<div  *ngIf="imagesLoaded" class="mb-5">
+  <h4>Delete Images</h4>
+  <p-carousel [value]="images" [numVisible]="3" [numScroll]="3" [circular]="false" >
+    <ng-template pTemplate="body" let-image>
+      <p-card>
+        <ng-template pTemplate="header">
+          <img alt="Card" src="{{image.imagePath | apiImage}}" style="height: 13vw;  object-fit: cover;">
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div class="text-center">
+            <button class="btn btn-primary" (click)="deleteImage(image)">Delete</button>
+          </div>
+        </ng-template>
+      </p-card>
+    </ng-template>
+  </p-carousel>
+  <h5>Upload Images</h5>
+  <p-fileUpload [customUpload]="true" (uploadHandler)="uploadImages($event)" [multiple]="true" [maxFileSize]="1000000"
+    [fileLimit]="5" accept="image/*">
+  </p-fileUpload>
+</div>
+
+
+
+
+
+
+<!-- update car data -->
+<form [formGroup]="carUpdateForm" *ngIf="carLoaded">
+  <h5 class="mb-3">Update Data</h5>
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-3  mt-2">
+        <h5>Brand</h5>
+        <p-dropdown *ngIf="brandsLoaded" [options]="brands" optionLabel="name" optionValue="id"
+          formControlName="brandId" [showClear]="true" show placeholder="Select a Brand"></p-dropdown>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Model</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="model" type="string" formControlName="model" pInputText>
+          <label for="model">Model</label>
+        </span>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Model Year</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="modelYear" type="number" formControlName="modelYear" pInputText>
+          <label for="modelYear">Model Year</label>
+        </span>
+      </div>
+
+      <div class="col-3  mt-2">
+        <h5>Color</h5>
+        <p-dropdown *ngIf="colorsLoaded" [options]="colors" optionLabel="name" optionValue="id"
+          formControlName="colorId" [showClear]="true" placeholder="Select a Color"></p-dropdown>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Daily Price</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="dailyPrice" type="number" formControlName="dailyPrice" pInputText>
+          <label for="dailyPrice">Daily Price</label>
+        </span>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Findex Score</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="findexScore" type="number" formControlName="findexScore" pInputText>
+          <label for="findexScore">Findex Score</label>
+        </span>
+      </div>
+    </div>
+    <div class="mt-4 text-center">
+      <h5>description</h5>
+      <textarea rows="5" cols="50" pInputTextarea [autoResize]="true" formControlName="description"></textarea>
+    </div>
+  </div>
+  <div class="mt-4 text-center">
+    <button pButton [disabled]="carUpdateForm.invalid" type="submit" label="Update" class="p-button-success" (click)="updateCar()"></button>
+  </div>
+</form>

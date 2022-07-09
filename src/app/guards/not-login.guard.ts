@@ -15,7 +15,7 @@ export class NotLoginGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.loggedIn.getValue()) {
+    if (this.authService.isLoggedIn) {
       this.router.navigate(['/']);
       this.toastrService.error("You are already logged in");
       return false;

@@ -1,0 +1,104 @@
+<p-table #dt [value]="rentals" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+  [loading]="!rentalsLoaded" responsiveLayout="scroll" [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="brand">
+        <div class="flex justify-content-between align-items-center">
+          Brand
+          <p-sortIcon field="brand"></p-sortIcon>
+          <p-columnFilter type="text" field="brand" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="model">
+        <div class="flex justify-content-between align-items-center">
+          Model
+          <p-sortIcon field="model"></p-sortIcon>
+          <p-columnFilter type="text" field="model" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="customer">
+        <div class="flex justify-content-between align-items-center">
+          Customer
+          <p-sortIcon field="customer"></p-sortIcon>
+          <p-columnFilter type="text" field="customer" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="rentDate">
+        <div class="flex justify-content-between align-items-center">
+          Rent Date
+          <p-sortIcon field="rentDate"></p-sortIcon>
+          <p-columnFilter type="text" field="rentDate" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="returnDate">
+        <div class="flex justify-content-between align-items-center">
+          Return Date
+          <p-sortIcon field="returnDate"></p-sortIcon>
+          <p-columnFilter type="text" field="returnDate" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+
+      <!-- <th>
+        <div class="flex justify-content-between align-items-center">
+          <button pButton label="Add Color" type="button" icon="pi pi-plus" class="p-button-rounded p-button-info" (click)="addColor()"></button>
+        </div>
+      </th> -->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rental>
+    <tr class="p-row">
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{rental.brandName}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{rental.model}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{rental.customerName}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{rental.rentDate | date: 'y/M/d'}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{rental.returnDate | date: 'y/M/d'}}</span>
+          </div>
+        </div>
+      </td>
+      <!-- <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" key="{{color.id}}"></p-confirmDialog>
+            <button pButton class="p-button-rounded p-button-sm" (click)="editColor(color)" label="Edit"></button>
+            <button pButton class="p-button-rounded p-button-danger p-button-sm" (click)="deleteColor(color)" label="Delete"></button>
+          </div>
+        </div>
+      </td> -->
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No colors found.</td>
+    </tr>
+  </ng-template>
+</p-table>

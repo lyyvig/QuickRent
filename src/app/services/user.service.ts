@@ -1,6 +1,9 @@
+import { ListResponseModel } from './../models/listResponseModel';
+import { ChangePasswordModel } from './../models/changePasswordModel';
+import { ResponseModel } from './../models/responseModel';
 import { ObjectResponseModel } from './../models/objectResponseModel';
 import { Observable } from 'rxjs';
-import { UserUpdateModel } from './../models/userUpdateModel';
+import { UserModel } from '../models/userModel';
 import { TokenModel } from './../models/tokenModel';
 import { apiUrl } from './serviceConstants';
 import { HttpClient } from '@angular/common/http';
@@ -11,20 +14,29 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
+
   private serviceUrl = apiUrl + "users/"
 
   constructor(private httpClient:HttpClient) { }
 
-  updateUser(user:UserUpdateModel):Observable<ObjectResponseModel<TokenModel>>{
-    return this.httpClient.put<ObjectResponseModel<TokenModel>>(this.serviceUrl + "update", user);
+  updateUser(user:UserModel):Observable<ObjectResponseModel<TokenModel>>{
+    return this.httpClient.post<ObjectResponseModel<TokenModel>>(this.serviceUrl + "update", user);
   }
 
-  get(id: number):Observable<ObjectResponseModel<UserUpdateModel>>{
-    return this.httpClient.get<ObjectResponseModel<UserUpdateModel>>(this.serviceUrl + "get?id=" + id);
+  changePassword(changePasswordModel: ChangePasswordModel):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "changepassword", changePasswordModel);
   }
 
-  getByMail(email: string):Observable<ObjectResponseModel<UserUpdateModel>>{
-    return this.httpClient.get<ObjectResponseModel<UserUpdateModel>>(this.serviceUrl + "getbymail?email=" + email);
+  get(id: number):Observable<ObjectResponseModel<UserModel>>{
+    return this.httpClient.get<ObjectResponseModel<UserModel>>(this.serviceUrl + "get?id=" + id);
+  }
+
+  getByMail(email: string):Observable<ObjectResponseModel<UserModel>>{
+    return this.httpClient.get<ObjectResponseModel<UserModel>>(this.serviceUrl + "getbymail?email=" + email);
+  }
+
+  getUsers():Observable<ListResponseModel<UserModel>> {
+    return this.httpClient.get<ListResponseModel<UserModel>>(this.serviceUrl + "getusers");
   }
 
 }

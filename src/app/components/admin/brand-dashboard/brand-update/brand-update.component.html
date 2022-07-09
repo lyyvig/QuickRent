@@ -1,0 +1,19 @@
+<form [formGroup]="brandUpdateForm">
+  <div class="container  mt-4">
+    <div class="d-flex justify-content-center my-4">
+      <span class="p-float-label mt-1">
+        <input class="p-inputtext-lg" id="name" type="string" formControlName="name" pInputText>
+        <label for="name">Brand Name</label>
+      </span>
+    </div>
+
+
+    <div class="text-center">
+      <button pButton [disabled]="brandUpdateForm.invalid" label="Update Brand" type="button" icon="pi pi-plus" class="p-button-success mt-4" (click)="updateBrand()">
+      </button>
+
+    </div>
+
+
+  </div>
+</form>

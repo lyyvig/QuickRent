@@ -1,3 +1,4 @@
+import { CarStatsModel } from './../models/carStatsModel';
 import { ResponseModel } from './../models/responseModel';
 import { FilterOptions } from './../models/filterOptions';
 import { ObjectResponseModel } from './../models/objectResponseModel';
@@ -38,12 +39,20 @@ export class CarService {
     return this.httpClient.get<ObjectResponseModel<Car>>(this.serviceUrl + "get?id=" + carId)
   }
 
-  addCar(car:Car):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.serviceUrl + "add", car)
+  addCar(car:Car):Observable<ObjectResponseModel<number>>{
+    return this.httpClient.post<ObjectResponseModel<number>>(this.serviceUrl + "add", car)
   }
 
   updateCar(car:Car):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.serviceUrl + "update", car)
+  }
+
+  deleteCar(carId:number):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "delete", {id:carId})
+  }
+
+  getCarStats(id:number):Observable<ObjectResponseModel<CarStatsModel>>{
+    return this.httpClient.get<ObjectResponseModel<CarStatsModel>>(this.serviceUrl + "getcarstats?id=" + id)
   }
 
 }

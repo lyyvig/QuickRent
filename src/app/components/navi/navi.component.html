@@ -1,4 +1,3 @@
-
 <header class="p-3 bg-dark text-white navbar-dark mb-4">
 
   <div class="container">
@@ -6,37 +5,40 @@
       <a routerLink="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none  me-4">
 
         <img width="25" height="25" src="assets/lightning.png" alt="logo" class="img-fluid">
-        <a class="yellow-text">Quick<br/> Rent</a>
+        <a class="yellow-text">Quick<br /> Rent</a>
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a routerLink="/" class="nav-link px-2 text-white">Home</a></li>
         <li><a routerLink="/cars" class="nav-link px-2 text-white">Cars</a></li>
         <li><a routerLink="/about" class="nav-link px-2 text-white">About</a></li>
+        <li>
+          <div *ngIf="isAdmin()" class="">
+            <p-button routerLink="/admin" label="Admin Dashboard" styleClass="p-button-text"></p-button>
+          </div>
+        </li>
       </ul>
 
 
-      <div *ngIf="!(isLoggedIn | async)">
+      <div *ngIf="!isLoggedIn()">
         <button routerLink="/login" type="button" class="btn btn-outline-light me-2">Login</button>
         <button routerLink="/register" type="button" class="btn btn-outline-light">Register</button>
       </div>
 
-      <div *ngIf="(isLoggedIn | async)">
+      <div *ngIf="isLoggedIn()">
+
         <div ngbDropdown class="d-inline-block">
 
-          <button type="button" class="btn btn-outline-light" id="dropdownBasic1" ngbDropdownToggle>{{claims.fullName}}</button>
+          <button type="button" class="btn btn-outline-light" id="dropdownBasic1"
+            ngbDropdownToggle>{{getFullName()}}</button>
           <div ngbDropdownMenu class="bg-dark text-white" aria-labelledby="dropdownBasic1">
-            <button ngbDropdownItem (click)="logOut()" class="btn btn-outline-light text-white text-center">Profile</button>
-            <button ngbDropdownItem (click)="logOut()" class="text-white text-center">My Rentals</button>
+            <button ngbDropdownItem routerLink="/profile"
+              class="btn btn-outline-light text-white text-center">Profile</button>
+            <button ngbDropdownItem routerLink="/profile/rentals" class="text-white text-center">My Rentals</button>
             <button ngbDropdownItem (click)="logOut()" class="text-white text-center">Log out</button>
           </div>
         </div>
       </div>
-        <!-- dropdown for user processes -->
-
-
-
-        <!-- <button (click)="logOut()" type="button" class="btn btn-outline-light me-2">Log out</button> -->
 
     </div>
   </div>
@@ -45,6 +47,3 @@
 
 
 </header>
-
-
-

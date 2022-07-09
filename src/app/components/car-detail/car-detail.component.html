@@ -1,68 +1,46 @@
-<div *ngIf="dataLoaded" class="row align-items-center">
-  <div class="col-1"></div>
-  <div class="col-7 ">
-    <div *ngIf="dataLoaded" id="carouselExampleControls" class="carousel slide w-100" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div *ngFor="let image of currentCar.images" [class]="getPhotoClass(image)">
-          <img src="{{url + image.imagePath}}" class="d-block w-100" alt="">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+<div *ngIf="dataLoaded">
+  <div class="row">
+
+    <div class="col-md-8">
+
+      <p-galleria [value]="currentCar.images" [containerStyle]="{'max-width': '720px', 'min-width': '480px'}"
+        [numVisible]="5" [circular]="true" [autoPlay]="true" [showItemNavigators]="true" [showThumbnails]="false"
+        [showIndicators]="true">
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.imagePath | apiImage" style="width: 100%; display: block;" />
+        </ng-template>
+
+      </p-galleria>
     </div>
+    <div class="col-md-4">
 
-  </div>
-  <div class="col-3 ">
-    <ul class="list-group list-group-horizontal">
-      <li class="list-group-item list-group-item-dark">Color: </li>
-      <li class="list-group-item list-group-item-secondary">{{currentCar.colorName}}</li>
-    </ul>
-    <ul class="list-group list-group-horizontal">
-      <li class="list-group-item list-group-item-dark">Brand: </li>
-      <li class="list-group-item list-group-item-secondary">{{currentCar.brandName}}</li>
-    </ul>
-
-    <ul class="list-group list-group-horizontal">
-      <li class="list-group-item list-group-item-dark">Daily Price: </li>
-      <li class="list-group-item list-group-item-secondary">{{currentCar.dailyPrice | currency}}</li>
-    </ul>
-    <ul class="list-group list-group-horizontal">
-      <li class="list-group-item list-group-item-dark">Model Year: </li>
-      <li class="list-group-item list-group-item-secondary">{{currentCar.modelYear}}</li>
-    </ul>
+      <!-- <div class="mt-5">
+        <p-timeline [value]="attributes">
+          <ng-template pTemplate="content" let-attribute>
+            <small class="p-text-secondary">{{attribute.value}}</small>
+          </ng-template>
+          <ng-template pTemplate="opposite" let-attribute>
+            <small class="p-text-secondary">{{attribute.key}}</small>
+          </ng-template>
+        </p-timeline>
+      </div> -->
 
 
-</div>
+      <div class="mt-5">
+        <p-table [value]="attributes" responsiveLayout="scroll">
+          <ng-template pTemplate="body" let-attribute>
+            <tr>
+              <td class="text-center">{{attribute.key}}</td>
+              <td class="text-center">{{attribute.value}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button pButton pRipple type="button" label="Rent" class="p-button-outlined p-button-rounded" (click)="rent()"></button>
+      </div>
 
-<div class="row justify-content-center">
-  <div class="col-4 ">
-    <ul class="list-group list-group-horizontal">
-      <span class="input-group-text list-group-item-dark" id="basic-addon1">Rent Date: </span>
-      <input [(ngModel)]="rentDate" (ngModelChange)="checkIfDateSuitable()" min="{{minDate | date:'yyyy-MM-dd'}}" type="date" class="form-control" placeholder="Rent Date" aria-label="Rent Date" aria-describedby="basic-addon1">
-    </ul>
-  </div>
 
-</div>
-<div class="row justify-content-center">
-  <div class="col-4 ">
-    <ul class="list-group list-group-horizontal">
-      <span class="input-group-text list-group-item-dark" id="basic-addon1">Return Date: </span>
-      <input [(ngModel)]="returnDate" min="{{minDate | date:'yyyy-MM-dd'}}" type="date" class="form-control" placeholder="Return Date" aria-label="Return Date" aria-describedby="basic-addon1">
-    </ul>
-  </div>
-
-</div>
-<div class="row justify-content-center">
-  <div class="col-1 ">
-    <button *ngIf="!returnDate || !rentDate" (click)="setOrder()" type="button" class="btn btn-success" disabled>Rent</button>
-    <button *ngIf="returnDate && rentDate" (click)="setOrder()" type="button" class="btn btn-success">Rent</button>
+    </div>
   </div>
 </div>

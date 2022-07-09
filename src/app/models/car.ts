@@ -5,5 +5,6 @@ export interface Car{
   modelYear:number;
   dailyPrice:number;
   model:string;
+  findexScore:number;
   description:string;
 }

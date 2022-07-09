@@ -32,22 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.loginForm.value).subscribe(
-      (res) => {
-        if(res.success) {
-          this.localStorageService.setItem('token', res.data.token);
-          this.authService.loggedIn.next(true);
-          this.toastrService.success("Login successful");
-          this.router.navigate(['/']);
-        }
-        else{
-          this.toastrService.error(res.message);
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.authService.login(this.loginForm.value)
 
   }
 

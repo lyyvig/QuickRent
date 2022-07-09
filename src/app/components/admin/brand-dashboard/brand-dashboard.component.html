@@ -1,0 +1,62 @@
+<p-table #dt [value]="brands" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+  [loading]="!brandsLoaded" responsiveLayout="scroll" [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id">
+        <div class="flex justify-content-between align-items-center">
+          Id
+          <p-sortIcon field="id"></p-sortIcon>
+          <p-columnFilter type="text" field="id" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="name">
+        <div class="flex justify-content-between align-items-center">
+          Brand
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+
+      <th>
+        <div class="flex justify-content-between align-items-center">
+          <button pButton label="Add Brand" type="button" icon="pi pi-plus" class="p-button-success" (click)="addBrand()"></button>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-brand>
+    <tr class="p-row">
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{brand.id}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{brand.name}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" key="{{brand.id}}"></p-confirmDialog>
+            <button class="btn btn-primary btn-sm" (click)="editBrand(brand)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteBrand(brand)">Delete</button>
+          </div>
+        </div>
+      </td>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No brands found.</td>
+    </tr>
+  </ng-template>
+</p-table>

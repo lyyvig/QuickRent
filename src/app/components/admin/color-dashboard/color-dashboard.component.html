@@ -1,0 +1,62 @@
+<p-table #dt [value]="colors" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+  [loading]="!colorsLoaded" responsiveLayout="scroll" [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id">
+        <div class="flex justify-content-between align-items-center">
+          Id
+          <p-sortIcon field="id"></p-sortIcon>
+          <p-columnFilter type="text" field="id" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="name">
+        <div class="flex justify-content-between align-items-center">
+          Color
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu" class="ml-auto"></p-columnFilter>
+        </div>
+      </th>
+
+      <th>
+        <div class="flex justify-content-between align-items-center">
+          <button pButton label="Add Color" type="button" icon="pi pi-plus" class="p-button-rounded p-button-info" (click)="addColor()"></button>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-color>
+    <tr class="p-row">
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{color.id}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <span class="ml-1">{{color.name}}</span>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="flex justify-content-between align-items-center">
+          <div class="flex align-items-center">
+            <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" key="{{color.id}}"></p-confirmDialog>
+            <button pButton class="p-button-rounded p-button-sm" (click)="editColor(color)" label="Edit"></button>
+            <button pButton class="p-button-rounded p-button-danger p-button-sm" (click)="deleteColor(color)" label="Delete"></button>
+          </div>
+        </div>
+      </td>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="8">No colors found.</td>
+    </tr>
+  </ng-template>
+</p-table>

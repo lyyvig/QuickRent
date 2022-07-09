@@ -48,18 +48,7 @@ export class RegisterComponent implements OnInit {
       email: this.registerForm.value.email,
       password: this.registerForm.value.password
     }
-    this.authService.register(registerModel).subscribe(
-      (res) => {
-        if (res.success) {
-          this.localStorageService.setItem('token', res.data.token);
-          this.authService.loggedIn.next(true);
-          this.toastrService.success("Register successful");
-          this.router.navigate(['/']);
-        }
-        else {
-          this.toastrService.error(res.message);
-        }
-      });
+    this.authService.register(registerModel)
   }
 
 }

@@ -13,6 +13,8 @@ import { RentalDetail } from '../models/rentalDetail';
   providedIn: 'root'
 })
 export class RentalService {
+
+
   private serviceUrl = apiUrl + "rentals/"
 
   constructor(private httpClient: HttpClient) { }
@@ -20,8 +22,8 @@ export class RentalService {
   getRentalDetails(): Observable<ListResponseModel<RentalDetail>>{
     return this.httpClient.get<ListResponseModel<RentalDetail>>(this.serviceUrl + "getdetails")
   }
-  checkIfIntervalEmpty(rental:Rental): Observable<ObjectResponseModel<boolean>>{
-    return this.httpClient.post<ObjectResponseModel<boolean>>(this.serviceUrl + "checkifintervalempty", rental)
+  getOccupiedDates(carId:number): Observable<ListResponseModel<Date>>{
+    return this.httpClient.get<ListResponseModel<Date>>(this.serviceUrl + "getoccupieddates?carId=" + carId )
   }
 
   rent(rental:Rental, creditCard:CreditCard): Observable<ResponseModel>{

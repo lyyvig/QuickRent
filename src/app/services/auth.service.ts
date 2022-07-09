@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { RegisterModel } from './../models/registerModel';
 import { Router } from '@angular/router';
 import { Claims } from 'src/app/models/claims';
@@ -15,28 +16,85 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   private serviceUrl = apiUrl + "auth/"
+  private tokenExp = 0;
 
-  loggedIn = new BehaviorSubject<boolean>(this.isTokenValid());
+  claims: Claims;
+  isAdmin = false;
+
+  private _isLoggedIn = false
 
 
-  constructor(private httpClient: HttpClient, private localStorageService:LocalStorageService, private router:Router) { }
+  constructor(private httpClient: HttpClient, private localStorageService: LocalStorageService, private toastrService: ToastrService, private router: Router) {
+    if (this.getToken()) {
+      this._isLoggedIn = true;
+      this.getClaims()
+      this.getTokenExp()
+      this.getIsAdmin()
 
-
-  register(registerModel: RegisterModel): Observable<ObjectResponseModel<TokenModel>> {
-    return this.httpClient.post<ObjectResponseModel<TokenModel>>(this.serviceUrl + "register", registerModel);
-  }
-
-  login(signInModel: LoginModel): Observable<ObjectResponseModel<TokenModel>> {
-    return this.httpClient.post<ObjectResponseModel<TokenModel>>(this.serviceUrl + "login", signInModel);
+    }
   }
 
   get isLoggedIn() {
-    return this.loggedIn.asObservable(); // {2}
+    if (this._isLoggedIn && this.tokenExp < Date.now() / 1000) {
+      this.logout()
+      this.toastrService.info("Token expired, please login again.")
+    }
+    return this._isLoggedIn
+  }
+
+  set isLoggedIn(value) {
+    this._isLoggedIn = value
+  }
+
+
+  register(registerModel: RegisterModel) {
+    this.httpClient.post<ObjectResponseModel<TokenModel>>(this.serviceUrl + "register", registerModel).subscribe(
+      (res) => {
+        if (res.success) {
+          this.localStorageService.setItem('token', res.data.token);
+          this._isLoggedIn = true;
+          this.getClaims()
+          this.getTokenExp()
+          this.getIsAdmin()
+          this.toastrService.success("Register successful");
+          this.router.navigate(['/']);
+        }
+        else {
+          this.toastrService.error(res.message);
+        }
+      });
+  }
+
+  login(loginModel: LoginModel) {
+    this.httpClient.post<ObjectResponseModel<TokenModel>>(this.serviceUrl + "login", loginModel).subscribe(
+      (res) => {
+        if (res.success) {
+          this.localStorageService.setItem('token', res.data.token);
+          this._isLoggedIn = true;
+          this.getClaims()
+          this.getTokenExp()
+          this.getIsAdmin()
+
+          this.toastrService.success("Login successful");
+          this.router.navigate(['/']);
+        }
+        else {
+          this.toastrService.error(res.message)
+        }
+      }
+    )
+  }
+
+  logout(): void {
+    this.localStorageService.removeItem('token');
+    this._isLoggedIn = false;
+    this.isAdmin = false;
+    this.router.navigate(['/']);
   }
 
 
 
-  getClaims(): Claims | null {
+  private getClaims() {
     let token = this.getToken();
     let tokenAttributes = this.getTokenAttributes(token);
     if (tokenAttributes) {
@@ -46,30 +104,27 @@ export class AuthService {
         fullName: tokenAttributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
         roles: tokenAttributes['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
       };
-      return claims;
+      this.claims = claims;
     }
-    return null;
   }
 
-  logout(): void {
-    this.localStorageService.removeItem('token');
-    this.loggedIn.next(false);
-    this.router.navigate(['/']);
+
+  private getIsAdmin() {
+    if (this.claims.roles)
+      if (this.claims.roles.includes('admin'))
+        this.isAdmin = true;
+      else
+        this.isAdmin = false;
+    else
+      this.isAdmin = false;
   }
 
-  private isTokenValid(): boolean {
+  private getTokenExp() {
     let token = this.getToken();
     let tokenAttributes = this.getTokenAttributes(token);
     if (tokenAttributes) {
-      if(tokenAttributes.exp > Date.now()/1000)
-        return true;
-      else{
-        this.logout();
-        return false;
-      }
-
+      this.tokenExp = tokenAttributes.exp
     }
-    return false;
   }
 
   private getToken(): any {
@@ -80,7 +135,10 @@ export class AuthService {
 
   private getTokenAttributes(token: string): any {
     if (token) {
-      return JSON.parse(atob(token.split('.')[1]));
+      let tokenData = token.split('.')[1]
+      return JSON.parse(decodeURIComponent(atob(tokenData).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join('')));
     }
     return null;
   }

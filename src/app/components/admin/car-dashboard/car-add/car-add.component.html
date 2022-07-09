@@ -1,0 +1,64 @@
+<form [formGroup]="carAddForm">
+  <div class="container">
+    <div class="row">
+
+      <div class="my-3">
+        <p-fileUpload [customUpload]="true" (uploadHandler)="setImages($event)" [multiple]="true" [auto]="true"
+          [maxFileSize]="1000000" [fileLimit]="5" accept="image/*">
+        </p-fileUpload>
+      </div>
+
+      <div class="col-3  mt-2">
+        <h5>Brand</h5>
+        <p-dropdown *ngIf="brandsLoaded" [options]="brands" optionLabel="name" optionValue="id"
+          formControlName="brandId" [showClear]="true" show placeholder="Select a Brand"></p-dropdown>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Model</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="model" type="string" formControlName="model" pInputText>
+          <label for="model">Model</label>
+        </span>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Model Year</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="modelYear" type="number" formControlName="modelYear" pInputText>
+          <label for="modelYear">Model Year</label>
+        </span>
+      </div>
+
+      <div class="col-3  mt-2">
+        <h5>Color</h5>
+        <p-dropdown *ngIf="colorsLoaded" [options]="colors" optionLabel="name" optionValue="id"
+          formControlName="colorId" [showClear]="true" placeholder="Select a Color"></p-dropdown>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Daily Price</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="dailyPrice" type="number" formControlName="dailyPrice" pInputText>
+          <label for="dailyPrice">Daily Price</label>
+        </span>
+      </div>
+
+      <div class="col-4  mt-2">
+        <h5>Findex Score</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="findexScore" type="number" formControlName="findexScore" pInputText>
+          <label for="findexScore">Findex Score</label>
+        </span>
+      </div>
+    </div>
+    <div class="mt-4 text-center">
+      <h5>Description</h5>
+      <textarea  rows="5" cols="50" pInputTextarea [autoResize]="true"
+        formControlName="description"></textarea>
+    </div>
+  </div>
+  <div class="mt-4 text-center">
+    <button pButton [disabled]="carAddForm.invalid" type="submit" label="Add" class="p-button-success" (click)="addCar()"></button>
+  </div>
+</form>

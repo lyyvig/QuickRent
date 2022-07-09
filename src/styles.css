@@ -1,2 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 .dark-background {background-color: black;}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgb(30, 30, 30) inset !important;
+  -webkit-text-fill-color: white;
+}
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px rgb(30, 30, 30) inset !important;
+  -webkit-text-fill-color: white;
+}
