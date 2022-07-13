@@ -17,7 +17,7 @@ export class CarDetailComponent implements OnInit {
 
   url = backendUrl
   currentCar: CarDetail;
-  dataLoaded = false;
+  carLoaded = false;
 
   attributes: any[] = []
 
@@ -50,7 +50,7 @@ export class CarDetailComponent implements OnInit {
       if (result.success) {
         this.currentCar = result.data;
         this.getAttributes()
-        this.dataLoaded = true;
+        this.carLoaded = true;
       }
     })
   }
@@ -63,26 +63,6 @@ export class CarDetailComponent implements OnInit {
     this.attributes.push({key: "Daily Price", value: this.currentCar.dailyPrice + '$'})
   }
 
-
-
-  // setOrder() {
-  //   let rental:Rental = { id: 0, carId: this.currentCar.id, customerId: 2, rentDate: new Date(this.rentDate), returnDate: new Date(this.returnDate) }
-  //   if(rental.rentDate > rental.returnDate){
-  //     this.toastrService.error("Return date must be after rent date")
-  //     return;
-  //   }
-  //   this.rentalService.checkIfIntervalEmpty(rental).subscribe(result => {result
-  //     if(result.data){
-  //       this.orderService.set(rental)
-  //       this.router.navigate(["/rent"])
-  //     }
-  //     else{
-  //       this.toastrService.error("Interval is not empty")
-  //     }
-  //   });
-
-  // }
-
   rent(){
     this.ref = this.dialogService.open(CarRentComponent, {
       header: 'Rent Car',
@@ -91,8 +71,6 @@ export class CarDetailComponent implements OnInit {
       data: this.currentCar
     });
 
-    this.ref.onClose.subscribe(() => {
-    });
   }
 
 }

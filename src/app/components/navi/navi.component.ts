@@ -1,7 +1,5 @@
-import { Observable } from 'rxjs';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Claims } from 'src/app/models/claims';
 
 @Component({
   selector: 'app-navi',

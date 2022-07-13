@@ -1,6 +1,3 @@
-import { Router } from '@angular/router';
-import { LocalStorageService } from './../../services/local-storage.service';
-import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -14,10 +11,7 @@ export class LoginComponent implements OnInit {
   loginForm : FormGroup;
   constructor(
     private formBuilder:FormBuilder,
-    private authService:AuthService,
-    private toastrService:ToastrService,
-    private localStorageService:LocalStorageService,
-    private router:Router
+    private authService:AuthService
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.login(this.loginForm.value)
-
   }
 
 }

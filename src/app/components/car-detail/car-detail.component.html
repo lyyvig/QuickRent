@@ -1,4 +1,4 @@
-<div *ngIf="dataLoaded">
+<div *ngIf="carLoaded">
   <div class="row">
 
     <div class="col-md-8">
@@ -13,18 +13,6 @@
       </p-galleria>
     </div>
     <div class="col-md-4">
-
-      <!-- <div class="mt-5">
-        <p-timeline [value]="attributes">
-          <ng-template pTemplate="content" let-attribute>
-            <small class="p-text-secondary">{{attribute.value}}</small>
-          </ng-template>
-          <ng-template pTemplate="opposite" let-attribute>
-            <small class="p-text-secondary">{{attribute.key}}</small>
-          </ng-template>
-        </p-timeline>
-      </div> -->
-
 
       <div class="mt-5">
         <p-table [value]="attributes" responsiveLayout="scroll">

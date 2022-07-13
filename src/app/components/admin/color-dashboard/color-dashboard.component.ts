@@ -69,8 +69,7 @@ export class ColorDashboardComponent implements OnInit {
         this.colorService.deleteColor(color).subscribe(
           (result) => {
             if (result.success) {
-              this.toastrService.info(`${color.name} has been deleted`,
-                'Color Deleted', { timeOut: 10000 });
+              this.toastrService.info(result.message,"Delete successful", { timeOut: 10000 });
               this.getColors();
             }
             else {

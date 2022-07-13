@@ -95,7 +95,7 @@ export class CarDashboardComponent implements OnInit {
         this.carService.deleteCar(car.id).subscribe(
           (result)=>{
             if(result.success){
-              this.toastrService.success(carName + ' deleted successfully');
+              this.toastrService.success(result.message,"Delete successful", );
               this.getCars();
             }
           }

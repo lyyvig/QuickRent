@@ -1,6 +1,4 @@
 import { RegisterModel } from './../../models/registerModel';
-import { Router } from '@angular/router';
-import { LocalStorageService } from './../../services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,8 +17,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private localStorageService: LocalStorageService,
-    private router: Router) { }
+    ) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -37,9 +34,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
     if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-      this.toastrService.error('Passwords do not match');
+      this.toastrService.error('Passwords do not match!');
       return;
     }
     let registerModel: RegisterModel = {

@@ -14,7 +14,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = [
-      { label: 'Dashboard', icon: 'pi pi-fw pi-list', routerLink: ['/admin'] },
       {
         label: 'Cars',
         routerLink: ['cars']

@@ -1,8 +1,7 @@
 import { RentalDashboardComponent } from './components/admin/rental-dashboard/rental-dashboard.component';
 import { UserDashboardComponent } from './components/admin/user-dashboard/user-dashboard.component';
 import { AdminGuard } from './guards/admin.guard';
-//TODO customers, rentals to admin
-//TODO improvements
+
 
 
 import { ColorDashboardComponent } from './components/admin/color-dashboard/color-dashboard.component';
@@ -15,7 +14,6 @@ import { NotLoginGuard } from './guards/not-login.guard';
 import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './components/login/login.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
-import { RentalComponent } from './components/rental/rental.component';
 import { CarComponent } from './components/car/car.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -24,7 +22,6 @@ const routes: Routes = [
   { path: "", component: CarComponent },
   { path: "cars", component: CarComponent },
   { path: "car/:carId", component: CarDetailComponent },
-  { path: "rentals", component: RentalComponent, canActivate: [LoginGuard] },
   { path: "login", component: LoginComponent, canActivate: [NotLoginGuard] },
   { path: "register", component: RegisterComponent, canActivate: [NotLoginGuard] },
   { path: "profile", component: ProfileComponent, canActivate: [LoginGuard] },

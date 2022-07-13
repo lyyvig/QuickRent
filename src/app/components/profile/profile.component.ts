@@ -1,6 +1,5 @@
+import { CustomerService } from './../../services/customer.service';
 import { AuthService } from './../../services/auth.service';
-import { Router } from '@angular/router';
-import { LocalStorageService } from './../../services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from './../../services/user.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -29,28 +28,37 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private customerService: CustomerService,
     private authService: AuthService,
-    private toastrService: ToastrService,
-    private router: Router
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit(): void {
-    let id = this.authService.claims?.userId
-    if (id) {
-      this.userService.get(id).subscribe(
-        (res) => {
-          if (res.success) {
-            this.user = res.data;
-            this.userLoaded = true;
-            this.createUserUpdateForm();
-            this.createPasswordUpdateForm();
-          }
-          else {
-            this.toastrService.error(res.message);
-          }
-        });
-    }
+    this.getUser()
+    this.getCustomer()
 
+  }
+  getUser(){
+    this.userService.get(this.authService.claims?.userId).subscribe(
+      (res) => {
+        if (res.success) {
+          this.user = res.data;
+          this.createUserUpdateForm();
+          this.createPasswordUpdateForm();
+          this.userLoaded = true;
+        }
+      });
+  }
+
+  getCustomer(){
+    this.customerService.get(this.authService.claims?.userId).subscribe(result => {
+      console.log(result)
+      if(result.success){
+        this.customer = result.data
+        this.createCustomerUpdateForm()
+        this.customerLoaded = true;
+      }
+    })
   }
 
   createPasswordUpdateForm() {
@@ -67,6 +75,13 @@ export class ProfileComponent implements OnInit {
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
       email: [this.user.email, [Validators.required, Validators.email]]
+    });
+  }
+
+  createCustomerUpdateForm() {
+    this.customerUpdateForm = this.formBuilder.group({
+      id: [this.customer.id],
+      nationalIdentity: [this.customer.nationalIdentity, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
     });
   }
 
@@ -87,8 +102,13 @@ export class ProfileComponent implements OnInit {
       if (res.success) {
         this.toastrService.success(res.message);
       }
-      else {
-        this.toastrService.error(res.message);
+    });
+  }
+
+  updateCustomer(){
+    this.customerService.update(this.customerUpdateForm.value).subscribe((res) => {
+      if (res.success) {
+        this.toastrService.success(res.message);
       }
     });
   }

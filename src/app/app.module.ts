@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarComponent } from './components/car/car.component';
 import { NaviComponent } from './components/navi/navi.component';
-import { RentalComponent } from './components/rental/rental.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -51,13 +50,13 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { UserDashboardComponent } from './components/admin/user-dashboard/user-dashboard.component';
 import { RentalDashboardComponent } from './components/admin/rental-dashboard/rental-dashboard.component';
+import { ClaimComponent } from './components/admin/user-dashboard/claim/claim.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarComponent,
     NaviComponent,
-    RentalComponent,
     CarDetailComponent,
     CarRentComponent,
     CarUpdateComponent,
@@ -76,6 +75,7 @@ import { RentalDashboardComponent } from './components/admin/rental-dashboard/re
     ColorUpdateComponent,
     UserDashboardComponent,
     RentalDashboardComponent,
+    ClaimComponent,
   ],
   imports: [
     BrowserModule,

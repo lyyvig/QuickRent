@@ -20,7 +20,7 @@
             <input id="password" type="password" pInputText formControlName="password" class="p-inputtext w-100">
             <label for="password">Password</label>
           </span>
-          <button type="submit" (click)="login()" [disabled]="loginForm.invalid" class="w-100 btn btn-lg btn-primary">Login</button>
+          <button pButton type="submit" label="Login" (click)="login()" [disabled]="loginForm.invalid" class="w-100"></button>
         </form>
       </ng-template>
 

@@ -68,8 +68,7 @@ export class BrandDashboardComponent implements OnInit {
         this.brandService.deleteBrand(brand).subscribe(
           (result) => {
             if (result.success) {
-              this.toastrService.info(`${brand.name} has been deleted`,
-                'Brand Deleted', { timeOut: 10000 });
+              this.toastrService.info(result.message,"Delete successful", { timeOut: 10000 });
               this.getBrands();
             }
             else {

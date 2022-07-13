@@ -2,12 +2,12 @@
   <p-accordion>
     <p-accordionTab header="Filter">
       <div class="row">
-        <div class="col-2  me-2">
+        <div *ngIf="brandsLoaded" class="col-2  me-2">
           <h5 class="text-center">Brand</h5>
           <p-listbox [options]="brands" optionLabel="name" optionValue="id" formControlName="brandId"
             placeholder="Select Brand" [listStyle]="{'max-height':'200px'}"></p-listbox>
         </div>
-        <div class="col-2  me-1">
+        <div *ngIf="colorsLoaded" class="col-2  me-1">
           <h5 class="text-center">Color</h5>
           <p-listbox [options]="colors" optionLabel="name" optionValue="id" formControlName="colorId"
             placeholder="Select Color" [listStyle]="{'max-height':'200px'}">
@@ -41,7 +41,7 @@
   </p-accordion>
 </form>
 
-<div class="mt-5">
+<div *ngIf="carsLoaded" class="mt-5">
   <div class="row row-cols-1 row-cols-md-4 g-4">
     <div *ngFor="let car of cars" class="col">
       <p-card header="{{car.brandName}}" subheader="{{car.dailyPrice | currency}}">
@@ -50,8 +50,9 @@
         </ng-template>
         <p class="text-center">Rent a {{car.modelYear + " " + car.colorName + " " + car.brandName + " " + car.model}} car now.  </p>
         <ng-template pTemplate="footer">
-          <div class="d-flex justify-content-center">
-            <button routerLink="/car/{{car.id}}" pButton pRipple type="button" label="Details" class="p-button-outlined p-button-rounded"></button>
+          <div class="d-flex justify-content-between">
+            <button pButton pRipple type="button" label="Details" class="p-button-outlined p-button-rounded" routerLink="/car/{{car.id}}" ></button>
+            <button pButton pRipple type="button" label="Rent" class="p-button-outlined p-button-rounded" (click)="rent(car)"></button>
           </div>
         </ng-template>
       </p-card>

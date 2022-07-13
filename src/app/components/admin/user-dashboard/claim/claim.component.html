@@ -1,0 +1,16 @@
+
+  <h4>Add Claims</h4>
+  <div *ngIf="claimsLoaded" class="d-flex justify-content-center">
+    <p-dropdown [options]="claims" [(ngModel)]="selectedClaim" placeholder="Select a Claim" optionLabel="name" class="mr-4" [showClear]="true"></p-dropdown>
+    <button pButton label="Add Claim" type="button" icon="pi pi-plus" class="p-button-success ml-4" (click)="addClaim()"></button>
+  </div>
+
+  <h4>Delete Claims</h4>
+  <div *ngIf="userClaimsLoaded" class="d-flex justify-content-center">
+    <div *ngFor="let claim of userClaims">
+      <div class="column-auto">
+        <button pButton pRipple type="button" label="{{claim.name}}" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text" (click)="deleteClaim(claim)"></button>
+      </div>
+    </div>
+  </div>
+

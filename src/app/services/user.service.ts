@@ -1,3 +1,4 @@
+import { OperationClaim, UserOperationClaim } from './../models/operationClaims';
 import { ListResponseModel } from './../models/listResponseModel';
 import { ChangePasswordModel } from './../models/changePasswordModel';
 import { ResponseModel } from './../models/responseModel';
@@ -37,6 +38,22 @@ export class UserService {
 
   getUsers():Observable<ListResponseModel<UserModel>> {
     return this.httpClient.get<ListResponseModel<UserModel>>(this.serviceUrl + "getusers");
+  }
+
+  getUserClaims(userId: number):Observable<ListResponseModel<OperationClaim>> {
+    return this.httpClient.get<ListResponseModel<OperationClaim>>(this.serviceUrl + "getuserclaims?userId=" + userId);
+  }
+
+  getOperationClaims():Observable<ListResponseModel<OperationClaim>> {
+    return this.httpClient.get<ListResponseModel<OperationClaim>>(this.serviceUrl + "getoperationclaims");
+  }
+
+  addClaim(userOperationClaim: UserOperationClaim):Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "addclaim", userOperationClaim);
+  }
+
+  deleteClaim(userOperationClaim: UserOperationClaim):Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.serviceUrl + "deleteclaim", userOperationClaim);
   }
 
 }

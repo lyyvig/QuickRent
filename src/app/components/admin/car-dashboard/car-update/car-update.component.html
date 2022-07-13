@@ -9,7 +9,7 @@
         </ng-template>
         <ng-template pTemplate="footer">
           <div class="text-center">
-            <button class="btn btn-primary" (click)="deleteImage(image)">Delete</button>
+            <button pButton class="p-button-primary" label="Delete" (click)="deleteImage(image)"></button>
           </div>
         </ng-template>
       </p-card>
@@ -24,9 +24,6 @@
 
 
 
-
-
-<!-- update car data -->
 <form [formGroup]="carUpdateForm" *ngIf="carLoaded">
   <h5 class="mb-3">Update Data</h5>
   <div class="container">

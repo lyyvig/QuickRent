@@ -48,6 +48,7 @@ export class CarRentComponent implements OnInit {
   ngOnInit(): void {
     if(!this.authService.isLoggedIn){
       this.router.navigate(["/"]);
+      this.ref.close()
       this.toastrService.info("You need to login to rent a car")
     }
 

@@ -1,5 +1,4 @@
 import { CarImage } from './../../../../models/carImage';
-import { CarDetail } from './../../../../models/carDetail';
 import { ToastrService } from 'ngx-toastr';
 import { ImageService } from './../../../../services/image.service';
 import { CarService } from './../../../../services/car.service';
@@ -107,8 +106,7 @@ export class CarUpdateComponent implements OnInit {
   updateCar() {
     this.carService.updateCar(this.carUpdateForm.value).subscribe(result => {
       if (result.success) {
-        this.toastrService.success('Car updated successfully');
-        this.carUpdateForm.reset();
+        this.toastrService.success(result.message);
       }
     });
   }
