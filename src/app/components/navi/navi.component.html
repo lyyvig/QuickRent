@@ -11,7 +11,7 @@
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a routerLink="/" class="nav-link px-2 text-white">Home</a></li>
         <li><a routerLink="/cars" class="nav-link px-2 text-white">Cars</a></li>
-        <li><a routerLink="/about" class="nav-link px-2 text-white">About</a></li>
+        <li><a href="https://github.com/lyyvig" target="_blank" class="nav-link px-2 text-white">About</a></li>
         <li>
           <div *ngIf="isAdmin()" class="">
             <p-button routerLink="/admin" label="Admin Dashboard" styleClass="p-button-text"></p-button>
@@ -34,7 +34,6 @@
           <div ngbDropdownMenu class="bg-dark text-white" aria-labelledby="dropdownBasic1">
             <button ngbDropdownItem routerLink="/profile"
               class="btn btn-outline-light text-white text-center">Profile</button>
-            <button ngbDropdownItem routerLink="/profile/rentals" class="text-white text-center">My Rentals</button>
             <button ngbDropdownItem (click)="logOut()" class="text-white text-center">Log out</button>
           </div>
         </div>

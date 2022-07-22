@@ -34,7 +34,7 @@ export class ColorAddComponent implements OnInit {
       (result)=>{
         if(result.success){
           this.toastrService.success(result.message);
-          this.colorAddForm.reset()
+          this.createColorAddForm();
         }
         else {
           this.toastrService.error(result.message)

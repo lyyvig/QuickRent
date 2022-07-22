@@ -46,7 +46,7 @@
     <div *ngFor="let car of cars" class="col">
       <p-card header="{{car.brandName}}" subheader="{{car.dailyPrice | currency}}">
         <ng-template pTemplate="header">
-          <img alt="Card" src="{{car.images[0].imagePath | apiImage}}" style="height: 13vw;  object-fit: cover;">
+          <img alt="Card" src="{{car.images[0].imagePath | apiImage}}" style="height: 9vw;  object-fit: cover;">
         </ng-template>
         <p class="text-center">Rent a {{car.modelYear + " " + car.colorName + " " + car.brandName + " " + car.model}} car now.  </p>
         <ng-template pTemplate="footer">

@@ -7,5 +7,5 @@ import { Component, enableProdMode } from '@angular/core';
 })
 export class AppComponent {
   a = enableProdMode();
-  title = 'RentACarFrontEnd';
+  title = 'QuickRent';
 }

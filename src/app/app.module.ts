@@ -51,6 +51,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { UserDashboardComponent } from './components/admin/user-dashboard/user-dashboard.component';
 import { RentalDashboardComponent } from './components/admin/rental-dashboard/rental-dashboard.component';
 import { ClaimComponent } from './components/admin/user-dashboard/claim/claim.component';
+import { FieldsetModule } from 'primeng/fieldset';
+
+
+
 
 @NgModule({
   declarations: [
@@ -107,7 +111,8 @@ import { ClaimComponent } from './components/admin/user-dashboard/claim/claim.co
     CarouselModule,
     TimelineModule,
     CalendarModule,
-    InputMaskModule
+    InputMaskModule,
+    FieldsetModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

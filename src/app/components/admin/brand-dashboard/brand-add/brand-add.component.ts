@@ -34,7 +34,7 @@ export class BrandAddComponent implements OnInit {
       (result)=>{
         if(result.success){
           this.toastrService.success(result.message);
-          this.brandAddForm.reset()
+          this.createBrandAddForm();
         }
         else {
           this.toastrService.error(result.message)
